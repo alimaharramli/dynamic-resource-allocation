@@ -4,7 +4,16 @@ class Experiment:
         self.computation_speed_preference = computation_speed_preference
         self.memory_preference = memory_preference
         self.resource = None
+        
+    def is_preferred(self, experiment):
+        if experiment.resource is None:
+            return True
 
+        if self.resource is None:
+            return False
+
+        return self.utility(None) >= experiment.utility(None)
+        
     def utility(self, resource):
         if self.resource is None:
             self.resource = {
